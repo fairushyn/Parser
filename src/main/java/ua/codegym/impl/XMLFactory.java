@@ -7,29 +7,32 @@ import ua.codegym.Parser;
 import java.util.HashMap;
 import java.util.Map;
 
-public class XmlFactory {
+public class XMLFactory {
 
-  Map<Event, EventHandler> handlers = new HashMap<>();
+    public static class XmlFactory {
 
-  public static XmlFactory newBuilder() {
-    return new XmlFactory();
-  }
+        Map<Event, EventHandler> handlers = new HashMap<>();
 
-  public XmlFactory on(Event event, EventHandler handler) {
-    checkNotNull(event, "EVENT could not be NULL.");
-    checkNotNull(handler, "HANDLER could not be NULL.");
+        public static XmlFactory newBuilder() {
+            return new XmlFactory();
+        }
 
-    handlers.put(event, handler);
-    return this;
-  }
+        public XmlFactory on(Event event, EventHandler handler) {
+            checkNotNull(event, "EVENT could not be NULL.");
+            checkNotNull(handler, "HANDLER could not be NULL.");
 
-  public Parser build() {
-    return new XmlParser(handlers);
-  }
+            handlers.put(event, handler);
+            return this;
+        }
 
-  public static void checkNotNull(Object o, String msg) {
-    if (o == null) {
-      throw new IllegalArgumentException(msg);
+        public Parser build() {
+            return new XmlParser(handlers);
+        }
+
+        public static void checkNotNull(Object o, String msg) {
+            if (o == null) {
+                throw new IllegalArgumentException(msg);
+            }
+        }
     }
-  }
 }
