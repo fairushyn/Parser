@@ -7,14 +7,18 @@ import ua.codegym.Parser;
 import java.util.HashMap;
 import java.util.Map;
 
-public class XMLFactory {
-
-    public static class XmlFactory {
+public class XmlFactory {
 
         Map<Event, EventHandler> handlers = new HashMap<>();
 
         public static XmlFactory newBuilder() {
             return new XmlFactory();
+        }
+
+        public static void checkNotNull(Object o, String msg) {
+            if (o == null) {
+                throw new IllegalArgumentException(msg);
+            }
         }
 
         public XmlFactory on(Event event, EventHandler handler) {
@@ -29,10 +33,4 @@ public class XMLFactory {
             return new XmlParser(handlers);
         }
 
-        public static void checkNotNull(Object o, String msg) {
-            if (o == null) {
-                throw new IllegalArgumentException(msg);
-            }
-        }
-    }
 }
